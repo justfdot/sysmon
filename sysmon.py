@@ -54,13 +54,13 @@ def run_monitor():
 
     while True:
         handle_data(
-            99,  # psutil.cpu_percent(),
+            psutil.cpu_percent(),
             warn=85,
             crit=95,
             label='CPU')
 
         handle_data(
-            2.6 * 1024 * 1024 * 1024,  # psutil.virtual_memory().used,
+            psutil.virtual_memory().used,
             warn=(2.5 * 1024 * 1024 * 1024),
             crit=(2.8 * 1024 * 1024 * 1024),
             label='RAM')
