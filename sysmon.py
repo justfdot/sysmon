@@ -39,7 +39,7 @@ def handle_data(value, warn=50, crit=85, label=None):
     if label == 'RAM':
         value = humanize_bytes(value)
     elif label == 'CPU':
-        value = f'{label}%'
+        value = f'{value}%'
 
     tb.send_message(
         DESTINATION,
@@ -54,13 +54,13 @@ def run_monitor():
 
     while True:
         handle_data(
-            psutil.cpu_percent(),
+            99,  # psutil.cpu_percent(),
             warn=85,
             crit=95,
             label='CPU')
 
         handle_data(
-            psutil.virtual_memory().used,
+            2.6 * 1024 * 1024 * 1024,  # psutil.virtual_memory().used,
             warn=(2.5 * 1024 * 1024 * 1024),
             crit=(2.8 * 1024 * 1024 * 1024),
             label='RAM')
