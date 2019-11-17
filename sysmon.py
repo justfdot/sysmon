@@ -5,8 +5,8 @@ import telebot
 import time
 
 BOT_TOKEN = '652949053:AAGvpXVAkROr3GW9GQVS0pLkIJYKBgZDFQ8'
-DESTINATION = '922107755'
-# DESTINATION = '-338805972'
+# DESTINATION = '922107755'
+DESTINATION = '-338805972'
 
 tb = telebot.TeleBot(BOT_TOKEN)
 telebot.apihelper.proxy = {'https': 'socks5h://127.0.0.1:9050'}
@@ -30,9 +30,9 @@ def handle_data(value, warn=50, crit=85, label=None):
         crit *= -1
 
     if value >= crit:
-        title = 'CRITICAL'
+        title = 'Критический ️‼️'
     elif value >= warn:
-        title = 'WARNING'
+        title = 'Высокий ⚠'
     else:
         return
 
@@ -41,7 +41,10 @@ def handle_data(value, warn=50, crit=85, label=None):
 
     tb.send_message(
         DESTINATION,
-        f'System Monitor: {title}\n{label} usage: {value}',
+        (f'Монитор ресурсов\n'
+         f'Уровень: {title}\n'
+         f'Тип: {label}\n'
+         f'Использовано: {value}'),
         disable_web_page_preview=True, parse_mode='HTML')
 
 
@@ -50,15 +53,16 @@ def run_monitor():
     while True:
         handle_data(
             psutil.cpu_percent(),
-            warn=75,
-            crit=90,
+            warn=85,
+            crit=95,
             label='CPU')
 
         handle_data(
             psutil.virtual_memory().used,
-            warn=(2 * 1024 * 1024 * 1024),
-            crit=(2.6 * 1024 * 1024 * 1024),
+            warn=(2.5 * 1024 * 1024 * 1024),
+            crit=(2.8 * 1024 * 1024 * 1024),
             label='RAM')
+
         time.sleep(30)
 
 
