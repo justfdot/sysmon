@@ -49,7 +49,7 @@ def run_monitor():
 
     while True:
         handle_data(
-            80,  # psutil.cpu_percent(),
+            psutil.cpu_percent(),
             warn=75,
             crit=90,
             label='CPU')
