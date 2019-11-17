@@ -38,6 +38,8 @@ def handle_data(value, warn=50, crit=85, label=None):
 
     if label == 'RAM':
         value = humanize_bytes(value)
+    elif label == 'CPU':
+        value = f'{label}%'
 
     tb.send_message(
         DESTINATION,
