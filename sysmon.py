@@ -49,6 +49,8 @@ def handle_data(value, warn=50, crit=85, label=None):
          f'Использовано: {value}'),
         disable_web_page_preview=True, parse_mode='HTML')
 
+    time.sleep(300)
+
 
 def run_monitor():
 
